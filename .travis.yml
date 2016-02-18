@@ -5,7 +5,10 @@ services:
 
 before_install:
   - docker build -f ./docker/dockerfiles/base/Dockerfile -t linagora/esn-base .
-  - docker build -t chamerling/openpaas-esn .
+  - docker build -t chamerling/openpaas-esn-travis-test .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push linagora/esn-base
+  - docker push chamerling/openpaas-esn-travis-test
 
 script:
   - docker ps
